@@ -61,4 +61,45 @@ class User{
             return $msg;
         }
     }
+
+    /**
+     * User Registration
+     */
+    
+     public function userRegistration($name, $username, $password, $email){
+         $name = $this->fm->validation($name);
+         $username = $this->fm->validation($username);
+         $password = $this->fm->validation($password);
+         $email = $this->fm->validation($email);
+
+         $name = mysqli_real_escape_string($this->db->link, $name);
+         $username = mysqli_real_escape_string($this->db->link, $username);
+         $password = mysqli_real_escape_string($this->db->link, $password);
+         $email = mysqli_real_escape_string($this->db->link, $email);
+
+         if($name == '' || $username == '' || $password == '' || $email == ''){
+             echo "<span class='error'>Field Must NOT be Empty !</span>";
+             exit();
+         }else if(filter_var($email, FILTER_VALIDATE_EMAIL)== false){
+            echo "<span class='error'>Invalid Email Address !</span>";
+            exit();
+         }else{
+             $checkemail = "SELECT * FROM tbl_user WHERE email = '$email'";
+             $checkresult = $this->db->select($checkemail);
+             if($checkresult != false){
+                echo "<span class='error'>Email Already Exit !</span>";
+                exit();
+             }else{
+                 $query = "INSERT INTO tbl_user(name, username, password, email) VALUE('$name', '$username','$password', '$email')";
+                 $insert_row = $this->db->insert($query);
+                 if($insert_row){
+                     echo "<span class='success'>User Registration Successfullt</span>";
+                     exit();
+                 }else{
+                    echo "<span class='error'>User Registration not Successfullt</span>";
+                    exit(); 
+                 }
+             }
+         }
+     }
 }

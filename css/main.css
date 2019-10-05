@@ -118,3 +118,9 @@ input[type="submit"] {
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
+.error{
+  color: red;
+}
+.success{
+  color: green;
+}

@@ -5,33 +5,34 @@
 		<img src="img/regi.png"/>
 	</div>
 	<div class="segment">
-	<form action="" method="post">
+	<form method="post">
 		<table>
 		<tr>
            <td>Name</td>
-           <td><input type="text" name="name"></td>
+           <td><input type="text" name="name" id="name"></td>
          </tr>
 		<tr>
            <td>Username</td>
-           <td><input name="name" type="text" id="name"></td>
+           <td><input name="username" type="text" id="username"></td>
          </tr>
          <tr>
            <td>Password</td>
-           <td><input type="password" name="pass"></td>
+           <td><input type="password" name="password" id="password"></td>
          </tr>
          
          <tr>
            <td>E-mail</td>
-           <td><input name="email" type="text" ></td>
+           <td><input name="email" type="text" id="email"></td>
          </tr>
          <tr>
            <td></td>
-           <td><input type="submit" name="Submit" value="Signup">
+           <td><input type="submit" name="regsubmit" value="Signup" id="regsubmit">
            </td>
          </tr>
        </table>
 	   </form>
 	   <p>Already Registered ? <a href="index.php">Login</a> Here</p>
+     <span id="state"></span>
 	</div>
 
 

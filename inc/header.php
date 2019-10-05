@@ -1,4 +1,19 @@
 <?php
+	include_once('lib/Session.php');
+	Session::init();
+	include_once('lib/Database.php');
+	include_once('helpers/Format.php');
+
+	spl_autoload_register(function ($class) {
+		include_once 'classes/' . $class . '.php';
+	});
+
+	$db = new Database();
+	$fm = new Format();
+	$user = new User();
+	$exam = new Exam();
+	$pro = new Process();
+
 header("Cache-Control: no-store, no-cache, must-revalidate"); 
 header("Cache-Control: pre-check=0, post-check=0, max-age=0"); 
 header("Pragma: no-cache"); 
