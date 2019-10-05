@@ -123,3 +123,9 @@ input[type="submit"] {
 .success{
   color: green;
 }
+.userprofile {
+    width: 400px;
+    border: 1px solid #ddd;
+    padding: 40px;
+    margin: 0 auto;
+}

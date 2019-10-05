@@ -140,4 +140,44 @@ class User{
             }
         }
      }
+
+    //  User Profiel Update
+    public function getUserProfilr($userid){
+        $query = "SELECT * FROM tbl_user WHERE id='$userid'";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    // Update User
+    public function userProfileUpdate($id, $name, $username, $email){
+         $id = $this->fm->validation($id);
+         $name = $this->fm->validation($name);
+         $username = $this->fm->validation($username);
+         $email = $this->fm->validation($email);
+
+         $id = mysqli_real_escape_string($this->db->link, $id);
+         $name = mysqli_real_escape_string($this->db->link, $name);
+         $username = mysqli_real_escape_string($this->db->link, $username);
+         $email = mysqli_real_escape_string($this->db->link, $email);
+
+         if($name == '' || $username == '' || $email == ''){
+             echo "<span class='error'>Field Must NOT be Empty !</span>";
+             exit();
+         }else if(filter_var($email, FILTER_VALIDATE_EMAIL)== false){
+            echo "<span class='error'>Invalid Email Address !</span>";
+            exit();
+         }else{
+            $query = "UPDATE tbl_user SET name ='$name', username='$username', email='$email'  WHERE id='$id'";
+            $result = $this->db->update($query);
+            if($result){
+                echo "<span class='success'>User Update Successfully</span>";
+                exit();
+            }else{
+                echo "<span class='error'>User Update Not Insert</span>";
+                exit();
+            }
+         }
+
+         
+    }
 }

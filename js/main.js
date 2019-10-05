@@ -39,5 +39,25 @@
             })
             return false;
         })
+
+
+        // User Profile Update
+        $("#profileupdate").on("click", function(){
+            var id = $("#id").val();
+            var name = $("#name").val();
+            var username = $("#username").val();
+            var email = $("#email").val();
+            var datastring = 'id='+id+'&name=' + name + '&username=' + username + '&email=' + email;
+
+            $.ajax({
+                type: "POST",
+                url: "getuserprofile.php",
+                data: datastring,
+                success: function(response){
+                    $("#state").html(response);
+                }
+            })
+            return false;
+        })
     });
 })(jQuery);
