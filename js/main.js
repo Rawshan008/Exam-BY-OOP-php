@@ -18,5 +18,26 @@
             })
             return false;
         })
+
+        // User Login 
+        $("#loginsubmit").on("click", function(){
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var datastring = 'email=' + email +'&password='+ password;
+
+            $.ajax({
+                type: "POST",
+                url: "getlogin.php",
+                data: datastring,
+                success: function(response){
+                    if ($.trim(response) == "redirect"){
+                        window.location = "exam.php";
+                    }else{
+                        $("#state").html(response);
+                    }
+                }
+            })
+            return false;
+        })
     });
 })(jQuery);

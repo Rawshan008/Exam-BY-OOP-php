@@ -5,6 +5,7 @@
  */
 $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../lib/Database.php');
+include_once ($filepath.'/../lib/Session.php');
 include_once ($filepath.'/../helpers/Format.php');
 
 /**
@@ -101,5 +102,42 @@ class User{
                  }
              }
          }
+     }
+
+    //  login user
+     public function userLogin($email ,$password){
+        $email = $this->fm->validation($email);
+        $password = $this->fm->validation($password);
+
+        $email = mysqli_real_escape_string($this->db->link, $email);
+        $password = mysqli_real_escape_string($this->db->link, $password);
+
+        if($email == '' || $password == ''){
+            echo "<span class='error'>Field Must NOT be Empty !</span>";
+            exit();
+        }else if(filter_var($email, FILTER_VALIDATE_EMAIL)== false){
+            echo "<span class='error'>Invalid Email Address !</span>";
+            exit();
+        }else{
+            $query = "SELECT * FROM tbl_user WHERE email='$email' AND password='$password'";
+            $result = $this->db->select($query);
+            if($result != false){
+                $value = $result->fetch_assoc();
+                if($value['status'] == '1'){
+                    echo "<span class='error'>Your Id Disable</span>";
+                    exit();
+                }else{
+                    Session::init();
+                    Session::set("login", true);
+                    Session::set("userid", $value['id']);
+                    Session::set("username", $value['username']);
+                    Session::set("email", $value['email']);
+                    echo "redirect";
+                }
+            }else{
+                echo "<span class='error'>Database Does not Match !</span>";
+                exit();
+            }
+        }
      }
 }

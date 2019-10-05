@@ -34,17 +34,29 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 	<script src="js/main.js"></script>
 </head>
 <body>
-
+<?php 
+	if(isset($_GET['action']) && $_GET['action'] == 'logout'){
+		Session::destroy();
+		header("Location:index.php");
+	}
+?>
 <div class="phpcoding">
 	<section class="headeroption"></section>
 		<section class="maincontent">
 		<div class="menu">
 		<ul>
-			<li><a href="index.php">Login</a></li>
-			<li><a href="profile.php">Profile</a></li>
-			<li><a href="exam.php">Exam</a></li>
-			<li><a href="register.php">Register</a></li>
-			<li><a href="logout.php">Logout</a></li>
+			<?php if(Session::get("login") == true): ?>
+				<li><a href="profile.php">Profile</a></li>
+				<li><a href="exam.php">Exam</a></li>
+				<li><a href="?action=logout">Logout</a></li>
+			<?php else: ?>
+				<li><a href="index.php">Login</a></li>
+				<li><a href="register.php">Register</a></li>
+			<?php endif; ?>
+			
 		</ul>
+		<?php if(Session::get("login") == true): ?>
+			<span style="float:right; color: #888">Welcome <strong><?php echo Session::get("username")?></strong></span>
+		<?php endif; ?>
 		</div>
 	
