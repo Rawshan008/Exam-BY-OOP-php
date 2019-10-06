@@ -129,3 +129,36 @@ input[type="submit"] {
     padding: 40px;
     margin: 0 auto;
 }
+.start-exam {
+    width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+    border: 1px solid #ddd;
+}
+
+.start-exam p {
+    text-align: center;
+    background: #ddd;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.start-exam ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 30px;
+}
+
+a.startest {
+    display: block;
+    text-align: center;
+    background: #ddd;
+    color: #000;
+    font-size: 16px;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 20px;
+}

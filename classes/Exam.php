@@ -85,4 +85,19 @@ class Exam{
             echo "Error";
         }
     }
+
+    // get test question by number 
+    public function getQuestionByNumber($number){
+        $query = "SELECT * FROM tbl_ques WHERE quesno='$number'";
+        $question = $this->db->select($query);
+        $result = $question->fetch_assoc();
+        return $result;
+    }
+
+    // get question answer by number
+    public function getAnswerByNumber($number){
+        $query = "SELECT * FROM tbl_ans WHERE quesno='$number'";
+        $result = $this->db->select($query);
+        return $result;
+    }
 }
